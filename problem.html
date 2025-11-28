@@ -1,0 +1,480 @@
+<!-- filename: problem.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statement | Centralized Student Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-card: #ffffff;
+            --border: #e5e7eb;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-lg: rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+            padding-top: 80px;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+        
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+            background: var(--bg-secondary);
+        }
+        
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Hero */
+        .page-hero {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 5rem 2rem 3rem;
+            text-align: center;
+            color: white;
+            margin-bottom: 4rem;
+        }
+        
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .page-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Content Section */
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+        
+        /* Problem Card */
+        .problem-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--danger);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .problem-card:hover {
+            box-shadow: 0 8px 30px var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+        
+        .problem-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--danger);
+            margin-bottom: 1.5rem;
+        }
+        
+        .problem-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .problem-card ul {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .problem-card li {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+        
+        .problem-card strong {
+            color: var(--danger);
+            font-weight: 600;
+        }
+        
+        /* Stakeholder Table */
+        .stakeholder-section {
+            margin-top: 4rem;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        thead th {
+            color: white;
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        tbody td {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tbody tr:hover {
+            background: var(--bg-secondary);
+        }
+        
+        tbody td:first-child {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        /* Callout Box */
+        .callout {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1));
+            border-left: 4px solid var(--primary);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .callout h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .callout p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .content-section {
+                padding: 0 1.5rem 3rem;
+            }
+            
+            .problem-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">QuadraMind</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="problem.html" class="active">Problem</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="solution.html">Solution</a></li>
+                <li><a href="architecture.html">Architecture</a></li>
+                <li><a href="data.html">Data</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="ethics.html">Ethics</a></li>
+                <li><a href="lessons.html">Lessons</a></li>
+                
+            </ul>
+            
+        </div>
+    </nav>
+
+    <div class="page-hero">
+        <h1>Problem Statement</h1>
+        <p>Understanding the challenges facing Horizon State University</p>
+    </div>
+
+    <div class="content-section">
+        <h2 class="section-title">The Core Challenge</h2>
+        <p class="section-subtitle">No Early Warning System for At-Risk Students</p>
+        
+        <div class="problem-card">
+            <h3>Data Silos Create Blind Spots</h3>
+            <p>Data resided in isolated departmental systems—Academic Affairs, Financial Aid, Housing, and Student Life—with no cross-functional integration or holistic student view. This fragmentation created three critical issues:</p>
+        </div>
+
+        <div class="problem-card">
+            <h3>1. Data Accessibility Crisis</h3>
+            <p>Advisors required <strong>15–20 minutes per student</strong> to manually query multiple systems, delaying the identification of warning signs and coordination of support services.</p>
+            <ul>
+                <li>Academic data locked in separate portals</li>
+                <li>Financial information siloed in aid systems</li>
+                <li>Housing and engagement data disconnected</li>
+                <li>Manual cross-referencing required for each student</li>
+            </ul>
+        </div>
+
+        <div class="problem-card">
+            <h3>2. Reactive Interventions</h3>
+            <p>The university responded to manifest problems (e.g., academic probation after failing grades, financial counseling after payment defaults), <strong>missing critical opportunities for preventive action</strong>.</p>
+            <ul>
+                <li>Students identified only after failing courses</li>
+                <li>Financial issues detected after payment defaults</li>
+                <li>Engagement problems recognized too late</li>
+                <li>Limited ability to coordinate early support services</li>
+            </ul>
+        </div>
+
+        <div class="problem-card">
+            <h3>3. Inconsistent Risk Assessment</h3>
+            <p>Different departments used varying criteria, leading to a non-standardized methodology for evaluating combined risk factors and prioritizing limited intervention resources.</p>
+            <ul>
+                <li>No unified definition of "at-risk"</li>
+                <li>Inconsistent thresholds across departments</li>
+                <li>Difficulty prioritizing intervention resources</li>
+                <li>Lack of evidence-based decision making</li>
+            </ul>
+        </div>
+
+        <div class="callout">
+            <h4>The Result: Below-Average Retention</h4>
+            <p>These systemic issues contributed to HSU's below-average student retention rates, with advisors spending more time gathering data than actually advising students. The reactive approach meant intervention came too late for many at-risk students.</p>
+        </div>
+
+        <div class="stakeholder-section">
+            <h2 class="section-title">Stakeholder Impact</h2>
+            <p class="section-subtitle">How data silos affect different university stakeholders</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Stakeholder</th>
+                            <th>Pain Point</th>
+                            <th>Solution Requirement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Academic Advisors</td>
+                            <td>Time spent on manual data retrieval; difficulty tracking intervention outcomes.</td>
+                            <td>Student 360° Profile with unified data and persistent Advisor Notes for documentation.</td>
+                        </tr>
+                        <tr>
+                            <td>Department Chairs</td>
+                            <td>Inability to compare program performance (e.g., Engineering vs. Psychology) or justify resource allocation with evidence.</td>
+                            <td>Comparative Department Performance charts and Deep Dive analytics.</td>
+                        </tr>
+                        <tr>
+                            <td>Financial Aid Officers</td>
+                            <td>Disconnect between academic struggles and financial payment issues.</td>
+                            <td>Integrated Financial Card in 360° Profile to enable strategic aid targeting.</td>
+                        </tr>
+                        <tr>
+                            <td>Institutional Leadership</td>
+                            <td>Need for high-level, real-time Key Performance Indicators (KPIs) for accreditation and strategic planning.</td>
+                            <td>Dashboard View with retention rate and at-risk student count KPIs.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script>
+        
+        
+        
+        
+    </script>
+</body>
+</html>

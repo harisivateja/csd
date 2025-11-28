@@ -1,0 +1,351 @@
+<!-- filename: solution.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution & Features | Centralized Student Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-card: #ffffff;
+            --border: #e5e7eb;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-lg: rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --radius-lg: 20px;
+        }
+        
+        
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0; z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav .container {
+            max-width: 1400px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+        }
+        
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+        
+        .nav-links { display: flex; gap: 0.5rem; list-style: none; align-items: center; flex-wrap: wrap; }
+        
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none; padding: 0.5rem 1rem;
+            border-radius: var(--radius); font-weight: 500; font-size: 0.9rem; transition: all 0.3s;
+        }
+        
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); background: var(--bg-secondary); }
+        
+        .theme-toggle {
+            background: var(--bg-secondary); border: 1px solid var(--border);
+            color: var(--text-primary); padding: 0.5rem 1rem; border-radius: var(--radius);
+            cursor: pointer; font-weight: 500;
+        }
+        
+        .page-hero {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 5rem 2rem 3rem; text-align: center; color: white; margin-bottom: 4rem;
+        }
+        
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; }
+        
+        .content-section { max-width: 1200px; margin: 0 auto; padding: 0 2rem 4rem; }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif; font-size: 2.5rem;
+            font-weight: 800; color: var(--text-primary); margin-bottom: 1rem;
+        }
+        
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem; margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 2.5rem;
+            box-shadow: 0 4px 20px var(--shadow); transition: all 0.3s;
+            position: relative; overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .feature-card:hover {
+            box-shadow: 0 12px 40px var(--shadow-lg);
+            transform: translateY(-8px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem; margin-bottom: 1.5rem; display: block;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem; font-weight: 700;
+            color: var(--primary); margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            font-size: 1.05rem; line-height: 1.7;
+            color: var(--text-primary); margin-bottom: 1rem;
+        }
+        
+        .feature-card ul {
+            margin-left: 1.5rem; margin-top: 1rem;
+        }
+        
+        .feature-card li {
+            margin-bottom: 0.6rem; line-height: 1.6;
+            color: var(--text-primary);
+        }
+        
+        .capabilities-section {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(16, 185, 129, 0.05));
+            border-radius: var(--radius-lg); padding: 3rem; margin: 3rem 0;
+        }
+        
+        .capability-item {
+            background: var(--bg-card); border-left: 4px solid var(--secondary);
+            border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+        
+        .capability-item h3 {
+            font-size: 1.6rem; font-weight: 700;
+            color: var(--secondary); margin-bottom: 0.8rem;
+        }
+        
+        .capability-item p {
+            font-size: 1.05rem; line-height: 1.7;
+            color: var(--text-primary);
+        }
+        
+        .tech-stack {
+            display: flex; flex-wrap: wrap; gap: 1rem;
+            justify-content: center; margin: 2rem 0;
+        }
+        
+        .tech-badge {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white; padding: 0.6rem 1.5rem; border-radius: 25px;
+            font-weight: 600; font-size: 0.95rem;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        .stats-highlight {
+            background: var(--bg-card); border: 2px solid var(--primary);
+            border-radius: var(--radius-lg); padding: 2.5rem;
+            text-align: center; margin: 3rem 0;
+        }
+        
+        .stats-highlight h3 {
+            font-size: 2rem; font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stats-highlight p { font-size: 1.1rem; color: var(--text-secondary); }
+        
+        footer {
+            background: var(--bg-secondary); border-top: 1px solid var(--border);
+            padding: 3rem 2rem 2rem; margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem; margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; }
+        .footer-section p, .footer-section a { color: var(--text-secondary); text-decoration: none; display: block; margin-bottom: 0.5rem; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border); color: var(--text-secondary); }
+        
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .content-section { padding: 0 1.5rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">QuadraMind</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="problem.html">Problem</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="solution.html" class="active">Solution</a></li>
+                <li><a href="architecture.html">Architecture</a></li>
+                <li><a href="data.html">Data</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="ethics.html">Ethics</a></li>
+                <li><a href="lessons.html">Lessons</a></li>
+                
+            </ul>
+            
+        </div>
+    </nav>
+
+    <div class="page-hero">
+        <h1>Our Solution</h1>
+        <p>Transforming student advising through unified data and predictive analytics</p>
+    </div>
+
+    <div class="content-section">
+        <h2 class="section-title">Core Capabilities</h2>
+        <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem;">Three transformative capabilities to shift from reactive to proactive advising</p>
+        
+        <div class="capabilities-section">
+            <div class="capability-item">
+                <h3>1. Unified Data Integration</h3>
+                <p>Consolidates six derived data entities (Students, Financials, Housing, Enrollments, Courses, Advisors/Alerts) into a single profile. No more manual cross-system queries—all student information accessible in one unified view.</p>
+            </div>
+            
+            <div class="capability-item">
+                <h3>2. Predictive Risk Assessment</h3>
+                <p>A weighted algorithm generates a risk score (0-100) and classifies students into four risk levels (Critical, High, Medium, Low). The model identified <strong>291 at-risk students</strong> across the 1,000-student dataset using multi-factor analysis.</p>
+            </div>
+            
+            <div class="capability-item">
+                <h3>3. Advisor Decision Support</h3>
+                <p>Interactive interfaces provide real-time KPI monitoring (Dashboard View), caseload prioritization (Pulse Tracker), and comprehensive case management (Student 360° Profile) for evidence-based advising.</p>
+            </div>
+        </div>
+
+        <div class="stats-highlight">
+            <h3>291 At-Risk Students Identified</h3>
+            <p>29.1% of student population flagged for proactive intervention</p>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 4rem;">Key Features</h2>
+        <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem;">Comprehensive tools for every stakeholder</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">📊</span>
+                <h3>Dashboard View</h3>
+                <p>Displays real-time institutional KPIs supporting strategic decision-making:</p>
+                <ul>
+                    <li>Retention Rate (Current: 70.9%, Target: 85%)</li>
+                    <li>Average GPA (Current: 2.77, Target: 2.95)</li>
+                    <li>At-Risk Student Count (291 students)</li>
+                    <li>Trend visualization and comparative analytics</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🎯</span>
+                <h3>Pulse Tracker</h3>
+                <p>Enables advisors to prioritize their caseload and track intervention progress:</p>
+                <ul>
+                    <li>Sort students by risk level</li>
+                    <li>Filter by department, year, or risk category</li>
+                    <li>Track intervention status and outcomes</li>
+                    <li>Allocate resources to highest-need cases</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🎓</span>
+                <h3>Student 360° Profile</h3>
+                <p>Unifies all student data for comprehensive, evidence-based advising:</p>
+                <ul>
+                    <li>Academic performance and enrollment history</li>
+                    <li>Financial status and outstanding balances</li>
+                    <li>Engagement metrics and attendance data</li>
+                    <li>Calculated risk score with component breakdown</li>
+                    <li>Persistent advisor notes for documentation</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">📊</span>
+                <h3>Department Performance</h3>
+                <p>Comparative analytics for resource allocation and program improvement:</p>
+                <ul>
+                    <li>Compare GPA across departments</li>
+                    <li>Identify programs needing additional support</li>
+                    <li>Evidence-based resource allocation</li>
+                    <li>Strategic planning with data-driven insights</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">✏️</span>
+                <h3>Advisor Notes</h3>
+                <p>Persistent documentation for case management:</p>
+                <ul>
+                    <li>Document intervention attempts</li>
+                    <li>Track student progress over time</li>
+                    <li>Share insights with other advisors</li>
+                    <li>Build institutional knowledge</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🔍</span>
+                <h3>Interactive Filtering</h3>
+                <p>Dynamic data exploration and analysis:</p>
+                <ul>
+                    <li>Filter by academic year or semester</li>
+                    <li>Department-specific views</li>
+                    <li>Risk level segmentation</li>
+                    <li>Custom report generation</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 4rem;">Technology Stack</h2>
+        <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem; text-align: center;">Modern, scalable, and portfolio-ready architecture</p>
+        
+        <div class="tech-stack">
+            <span class="tech-badge">React 19.0</span>
+            <span class="tech-badge">FastAPI</span>
+            <span class="tech-badge">MongoDB</span>
+            <span class="tech-badge">Chart.js</span>
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">React Context API</span>
+            <span class="tech-badge">Async/Await</span>
+        </div>
+    </div>
+
+    
+
+    <script>
+        
+        
+        
+    </script>
+</body>
+</html>

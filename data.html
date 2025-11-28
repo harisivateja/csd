@@ -1,0 +1,261 @@
+<!-- filename: data.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Design | Centralized Student Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2563eb; --secondary: #10b981; --accent: #f59e0b;
+            --text-primary: #1f2937; --text-secondary: #6b7280;
+            --bg-primary: #ffffff; --bg-secondary: #f9fafb; --bg-card: #ffffff;
+            --border: #e5e7eb; --shadow: rgba(0, 0, 0, 0.1); --shadow-lg: rgba(0, 0, 0, 0.15);
+            --radius: 12px; --radius-lg: 20px;
+        }
+        
+        
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; padding-top: 80px; }
+        
+        nav { position: fixed; top: 0; left: 0; right: 0; background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 1rem 0; z-index: 1000; backdrop-filter: blur(10px); }
+        nav .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 0.5rem; list-style: none; align-items: center; flex-wrap: wrap; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 1rem; border-radius: var(--radius); font-weight: 500; font-size: 0.9rem; transition: all 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); background: var(--bg-secondary); }
+        .theme-toggle { background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: var(--radius); cursor: pointer; font-weight: 500; }
+        
+        .page-hero { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 5rem 2rem 3rem; text-align: center; color: #1f2937; margin-bottom: 4rem; }
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; }
+        
+        .content-section { max-width: 1200px; margin: 0 auto; padding: 0 2rem 4rem; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 800; color: var(--text-primary); margin-bottom: 1rem; }
+        
+        .data-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 4px 20px var(--shadow); transition: all 0.3s; }
+        .data-card:hover { box-shadow: 0 8px 30px var(--shadow-lg); transform: translateY(-4px); }
+        .data-card h3 { font-size: 1.6rem; font-weight: 700; color: var(--secondary); margin-bottom: 1rem; }
+        .data-card p { font-size: 1.05rem; line-height: 1.8; color: var(--text-primary); margin-bottom: 1rem; }
+        .data-card ul { margin-left: 1.5rem; margin-top: 1rem; }
+        .data-card li { margin-bottom: 0.8rem; line-height: 1.7; }
+        
+        .entities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 3rem 0; }
+        
+        .entity-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; box-shadow: 0 2px 10px var(--shadow); transition: all 0.3s; position: relative; overflow: hidden; }
+        .entity-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+        .entity-card:hover { transform: translateY(-6px); box-shadow: 0 8px 20px var(--shadow-lg); }
+        .entity-card h4 { font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem; }
+        .entity-card p { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.8rem; }
+        .entity-key { display: inline-block; background: var(--secondary); color: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-top: 0.5rem; }
+        
+        .diagram-container { background: var(--bg-card); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; margin: 3rem 0; text-align: center; cursor: pointer; transition: all 0.3s; }
+        .diagram-container:hover { box-shadow: 0 8px 30px var(--shadow-lg); transform: scale(1.02); }
+        .diagram-placeholder { width: 100%; height: 500px; background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1)); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; flex-direction: column; }
+        .diagram-placeholder p { font-size: 1.2rem; font-weight: 600; color: var(--text-secondary); margin-top: 1rem; }
+        .diagram-caption { margin-top: 1.5rem; font-size: 1.05rem; color: var(--text-secondary); font-style: italic; }
+        
+        .highlight-box { background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1)); border-left: 4px solid var(--primary); border-radius: var(--radius); padding: 2rem; margin: 2rem 0; }
+        .highlight-box h4 { font-size: 1.4rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem; }
+        
+        .lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); align-items: center; justify-content: center; }
+        .lightbox.active { display: flex; }
+        .lightbox-content { max-width: 90%; max-height: 90%; }
+        .lightbox-close { position: absolute; top: 2rem; right: 2rem; color: white; font-size: 3rem; cursor: pointer; }
+        
+        footer { background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 3rem 2rem 2rem; margin-top: 4rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .footer-section h4 { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; }
+        .footer-section p, .footer-section a { color: var(--text-secondary); text-decoration: none; display: block; margin-bottom: 0.5rem; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border); color: var(--text-secondary); }
+        
+        @media (max-width: 768px) { .page-hero h1 { font-size: 2.5rem; } .nav-links { display: none; } .content-section { padding: 0 1.5rem 3rem; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">QuadraMind</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="problem.html">Problem</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="solution.html">Solution</a></li>
+                <li><a href="architecture.html">Architecture</a></li>
+                <li><a href="data.html" class="active">Data</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="ethics.html">Ethics</a></li>
+                <li><a href="lessons.html">Lessons</a></li>
+                
+            </ul>
+            
+        </div>
+    </nav>
+
+    <div class="page-hero">
+        <h1>Data Design</h1>
+        <p>Synthetic dataset with referential integrity and logical coherence</p>
+    </div>
+
+    <div class="content-section">
+        <div class="data-card">
+            <h3>Synthetic Dataset Approach</h3>
+            <p>The Centralized Student Dashboard prototype utilizes a <strong>synthetic dataset</strong> comprising 1,000 student records distributed across six derived entities. This approach was necessary as the project, developed as a prototype, did not have access to real, protected student information.</p>
+            <p>The methodology focused on ensuring <strong>logical coherence</strong> and <strong>referential integrity</strong> to simulate real-world university data while embedding known correlations necessary for testing the predictive model.</p>
+        </div>
+
+        <div class="diagram-container" onclick="openLightbox('erd')">
+            <img src="./images/erd-diagram.png" alt="Entity Relationship Diagram" style="width: 100%; height: auto; border-radius: var(--radius);">
+            <p class="diagram-caption">Figure 1: Entity Relationship Diagram - Data Structure</p>
+        </div>
+
+        <h2 class="section-title">Data Entities</h2>
+        <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem;">Six interconnected entities normalized to Third Normal Form (3NF)</p>
+        
+        <div class="entities-grid">
+            <div class="entity-card">
+                <h4>Students</h4>
+                <p><strong>Primary Key:</strong> Student_ID</p>
+                <p>Core student demographic and academic information</p>
+                <ul style="font-size: 0.9rem; margin-top: 0.8rem;">
+                    <li>Name, Email, Year</li>
+                    <li>Major, Department</li>
+                    <li>GPA, Attendance %</li>
+                    <li>Engagement Score</li>
+                </ul>
+                <span class="entity-key">Central Entity</span>
+            </div>
+
+            <div class="entity-card">
+                <h4>Financials</h4>
+                <p><strong>Foreign Key:</strong> Student_ID</p>
+                <p>Financial aid and payment information</p>
+                <ul style="font-size: 0.9rem; margin-top: 0.8rem;">
+                    <li>Tuition Amount</li>
+                    <li>Aid Received</li>
+                    <li>Outstanding Balance</li>
+                    <li>Payment Status</li>
+                </ul>
+                <span class="entity-key">1:1 Relationship</span>
+            </div>
+
+            <div class="entity-card">
+                <h4>Housing</h4>
+                <p><strong>Foreign Key:</strong> Student_ID</p>
+                <p>Residential and housing status</p>
+                <ul style="font-size: 0.9rem; margin-top: 0.8rem;">
+                    <li>Housing Type</li>
+                    <li>Residence Hall</li>
+                    <li>Room Number</li>
+                    <li>Move-in Date</li>
+                </ul>
+                <span class="entity-key">1:1 Relationship</span>
+            </div>
+
+            <div class="entity-card">
+                <h4>Enrollments</h4>
+                <p><strong>Foreign Keys:</strong> Student_ID, Course_ID</p>
+                <p>Course enrollment records</p>
+                <ul style="font-size: 0.9rem; margin-top: 0.8rem;">
+                    <li>Semester, Year</li>
+                    <li>Grade</li>
+                    <li>Credits</li>
+                    <li>Enrollment Status</li>
+                </ul>
+                <span class="entity-key">Many:Many</span>
+            </div>
+
+            <div class="entity-card">
+                <h4>Courses</h4>
+                <p><strong>Primary Key:</strong> Course_ID</p>
+                <p>Course catalog information</p>
+                <ul style="font-size: 0.9rem; margin-top: 0.8rem;">
+                    <li>Course Name</li>
+                    <li>Department</li>
+                    <li>Credits</li>
+                    <li>Instructor</li>
+                </ul>
+                <span class="entity-key">Reference Entity</span>
+            </div>
+
+            <div class="entity-card">
+                <h4>Advisors/Alerts</h4>
+                <p><strong>Foreign Key:</strong> Student_ID</p>
+                <p>Advisory interventions and alerts</p>
+                <ul style="font-size: 0.9rem; margin-top: 0.8rem;">
+                    <li>Advisor Name</li>
+                    <li>Alert Type</li>
+                    <li>Alert Date</li>
+                    <li>Intervention Notes</li>
+                </ul>
+                <span class="entity-key">1:Many</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">Data Design Principles</h2>
+        
+        <div class="data-card">
+            <h3>Referential Integrity</h3>
+            <p>The dataset was created programmatically using the <strong>pandas and faker libraries</strong> in Python. The design established Referential Integrity by making <code>Student_ID</code> the primary Foreign Key, explicitly linking records across the Financials, Housing, Enrolments, and Alerts collections back to the Students entity.</p>
+            <p>This ensures that:</p>
+            <ul>
+                <li>Every financial record corresponds to an existing student</li>
+                <li>All enrollment records reference valid Student_ID and Course_ID values</li>
+                <li>Housing assignments are linked to active students</li>
+                <li>Advisor alerts are traceable to specific students</li>
+            </ul>
+        </div>
+
+        <div class="data-card">
+            <h3>Normalization to 3NF</h3>
+            <p>All six derived datasets were normalized to <strong>Third Normal Form (3NF)</strong> to remove redundancy and improve storage efficiency.</p>
+            <p>For example, course details (Course_Name, Department, Credits) are stored once in the Courses entity, with Enrolments only storing the Course_ID as a Foreign Key. This structure optimizes data retrieval for the high-frequency query of a single student's profile (360° View) by minimizing I/O operations and ensuring data consistency across all dependent records.</p>
+        </div>
+
+        <div class="data-card">
+            <h3>Logical Coherence</h3>
+            <p>The synthetic data incorporates realistic correlations to test the predictive model:</p>
+            <ul>
+                <li><strong>GPA-Attendance Correlation:</strong> Students with higher attendance rates tend to have higher GPAs</li>
+                <li><strong>Financial Stress Impact:</strong> Students with outstanding balances above $15,000 show lower engagement scores</li>
+                <li><strong>Department Variations:</strong> Different departments (Engineering, Psychology, Business, etc.) exhibit characteristic GPA distributions</li>
+                <li><strong>Year Progression:</strong> Freshmen show different risk patterns compared to seniors</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <h4>Risk Algorithm Validation</h4>
+            <p>The synthetic dataset was specifically designed to validate the multi-factor risk assessment algorithm. By embedding known correlations, the team confirmed that:</p>
+            <p>• <strong>75% of Critical Risk students</strong> exhibited both GPA below 2.5 AND outstanding balance above $15,000</p>
+            <p>• The 40/30/20/10 weighting accurately identified at-risk populations</p>
+            <p>• The model successfully differentiated between students needing academic vs. financial interventions</p>
+        </div>
+    </div>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="ERD Diagram">
+    </div>
+
+    
+
+    <script>
+        
+        
+        
+        
+        function openLightbox(id) {
+            document.getElementById('lightbox').classList.add('active');
+            document.getElementById('lightbox-img').src = './images/erd-diagram.png';
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

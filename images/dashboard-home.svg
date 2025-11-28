@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect fill="url(#grad)" width="1920" height="1080"/>
+  <text x="960" y="400" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">Centralized Student Dashboard</text>
+  <text x="960" y="480" font-family="Arial, sans-serif" font-size="32" fill="rgba(255,255,255,0.9)" text-anchor="middle">Unifying Student Data for Smarter Decisions</text>
+  
+  <!-- KPI Cards -->
+  <rect x="260" y="600" width="300" height="180" rx="15" fill="white" opacity="0.95"/>
+  <text x="410" y="720" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="#667eea" text-anchor="middle">1000</text>
+  <text x="410" y="760" font-family="Arial, sans-serif" font-size="18" fill="#666" text-anchor="middle">Total Students</text>
+  
+  <rect x="610" y="600" width="300" height="180" rx="15" fill="white" opacity="0.95"/>
+  <text x="760" y="720" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="#667eea" text-anchor="middle">70.9%</text>
+  <text x="760" y="760" font-family="Arial, sans-serif" font-size="18" fill="#666" text-anchor="middle">Retention Rate</text>
+  
+  <rect x="960" y="600" width="300" height="180" rx="15" fill="white" opacity="0.95"/>
+  <text x="1110" y="720" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="#667eea" text-anchor="middle">2.77</text>
+  <text x="1110" y="760" font-family="Arial, sans-serif" font-size="18" fill="#666" text-anchor="middle">Average GPA</text>
+  
+  <rect x="1310" y="600" width="300" height="180" rx="15" fill="white" opacity="0.95"/>
+  <text x="1460" y="720" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="#667eea" text-anchor="middle">291</text>
+  <text x="1460" y="760" font-family="Arial, sans-serif" font-size="18" fill="#666" text-anchor="middle">At-Risk Students</text>
+  
+  <text x="960" y="950" font-family="Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.7)" text-anchor="middle">Screenshot from: https://harisivasaiteja.github.io/Studentdashboard/</text>
+</svg>

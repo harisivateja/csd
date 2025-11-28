@@ -1,0 +1,354 @@
+<!-- filename: research.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research & Insights | Centralized Student Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-card: #ffffff;
+            --border: #e5e7eb;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-lg: rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --radius-lg: 20px;
+        }
+        
+        
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+            background: var(--bg-secondary);
+        }
+        
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .page-hero {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 5rem 2rem 3rem;
+            text-align: center;
+            color: white;
+            margin-bottom: 4rem;
+        }
+        
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .research-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--secondary);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s;
+        }
+        
+        .research-card:hover {
+            box-shadow: 0 8px 30px var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+        
+        .research-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .research-card p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .research-card ul {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .research-card li {
+            margin-bottom: 0.8rem;
+            line-height: 1.7;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .citation {
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1));
+            border-left: 4px solid var(--primary);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .highlight-box h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .content-section { padding: 0 1.5rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">QuadraMind</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="problem.html">Problem</a></li>
+                <li><a href="research.html" class="active">Research</a></li>
+                <li><a href="solution.html">Solution</a></li>
+                <li><a href="architecture.html">Architecture</a></li>
+                <li><a href="data.html">Data</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="ethics.html">Ethics</a></li>
+                <li><a href="lessons.html">Lessons</a></li>
+                
+            </ul>
+            
+        </div>
+    </nav>
+
+    <div class="page-hero">
+        <h1>Research & Insights</h1>
+        <p>Evidence-based foundations for our solution</p>
+    </div>
+
+    <div class="content-section">
+        <h2 class="section-title">Empirical Foundations</h2>
+        <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 3rem;">Our project is grounded in educational data analytics and learning theory, justifying the multi-factor, early-alert approach.</p>
+        
+        <div class="research-card">
+            <div>
+                <span class="tag">Predictive Analytics</span>
+                <span class="tag">Multi-Factor Modeling</span>
+            </div>
+            <h3>Multi-Factor Predictive Modeling</h3>
+            <p>Research by Siemens & Long (2011) and others highlights that <strong>single-factor approaches (e.g., GPA-only) consistently underperform</strong> compared to holistic assessments combining academic, behavioral, and demographic variables.</p>
+            <p>This insight informed the project's <strong>40/30/20/10 weighted algorithm design</strong>:</p>
+            <ul>
+                <li><strong>40% GPA:</strong> Academic performance as primary indicator</li>
+                <li><strong>30% Attendance:</strong> Behavioral engagement predictor</li>
+                <li><strong>20% Engagement:</strong> Social integration factors</li>
+                <li><strong>10% Financial:</strong> Economic stress indicators</li>
+            </ul>
+            <p class="citation">Siemens, G., & Long, P. (2011). Penetrating the Fog: Analytics in Learning and Education. EDUCAUSE Review, 46(5), 30–39.</p>
+        </div>
+
+        <div class="research-card">
+            <div>
+                <span class="tag">Early Intervention</span>
+                <span class="tag">Retention</span>
+            </div>
+            <h3>Timely Intervention Impact</h3>
+            <p>Arnold and Pistilli's (2012) work on early alert systems demonstrated that predictive analytics can <strong>improve student retention by 12–21%</strong>, validating the need for the Pulse Tracker to facilitate rapid intervention.</p>
+            <p>Their Course Signals system at Purdue University showed that students who received early alerts were significantly more likely to succeed, with the greatest benefits for at-risk populations.</p>
+            <p class="citation">Arnold, K. E., & Pistilli, M. D. (2012). Course Signals at Purdue: Using Learning Analytics to Increase Student Success. In Proceedings of the 2nd International Conference on Learning Analytics and Knowledge (LAK '12, pp. 267–270). ACM.</p>
+        </div>
+
+        <div class="research-card">
+            <div>
+                <span class="tag">Learning Theory</span>
+                <span class="tag">Student Integration</span>
+            </div>
+            <h3>Integration and Persistence Theory</h3>
+            <p>Tinto's Student Integration Theory (1975) emphasizes the importance of both <strong>academic and social integration</strong>. This validates the inclusion and weighting of the Engagement Score (social/behavioral data) alongside GPA (academic data) as a key predictor.</p>
+            <p>Kuh et al. (2008) further demonstrated that student engagement metrics are strong predictors of persistence and achievement, supporting our multi-dimensional approach.</p>
+            <p class="citation">Tinto, V. (1975). Dropout from Higher Education: A Theoretical Synthesis of Recent Research. Review of Educational Research, 45(1), 89–125.</p>
+            <p class="citation">Kuh, G. D., Kinzie, J., Buckley, J. A., Bridges, B. K., & Hayek, J. C. (2008). College Students' Engagement in Learning: A Synthesis of Research. ASHE Higher Education Report, 33(2).</p>
+        </div>
+
+        <div class="research-card">
+            <div>
+                <span class="tag">Financial Risk</span>
+                <span class="tag">Dropout Prevention</span>
+            </div>
+            <h3>Financial Stress as Predictor</h3>
+            <p>Studies confirm that financial stress, particularly outstanding balances above specific thresholds, is a <strong>strong, non-linear predictor of dropout decisions</strong> (Paulsen & St. John, 2002), justifying the 10% Financial Component weight.</p>
+            <p>The research shows that even moderate financial stress can significantly impact academic performance and persistence, especially when combined with other risk factors.</p>
+            <p class="citation">Paulsen, M. B., & St. John, E. P. (2002). The Financial Nexus Between College Choice and Persistence. In J. C. Smart (Ed.), Higher Education: Handbook of Theory and Research, 17, 331-364.</p>
+        </div>
+
+        <div class="highlight-box">
+            <h4>Comparative Market Analysis</h4>
+            <p>The Centralized Student Dashboard fills a critical market gap. Existing solutions are typically either expensive, high-complexity Enterprise Systems (e.g., Starfish) or inflexible, report-focused Data Warehouses.</p>
+            <p>Our solution is an <strong>intermediate approach</strong>: providing sophisticated predictive analytics and actionable interfaces (like the Pulse Tracker) without the high adoption barriers or cost of enterprise software. This makes it ideal for mid-sized institutions like HSU.</p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        
+        
+        
+    </script>
+</body>
+</html>

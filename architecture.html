@@ -1,0 +1,310 @@
+<!-- filename: architecture.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Architecture | Centralized Student Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-card: #ffffff;
+            --border: #e5e7eb;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-lg: rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --radius-lg: 20px;
+        }
+        
+        
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif; background: var(--bg-primary);
+            color: var(--text-primary); line-height: 1.6; padding-top: 80px;
+        }
+        
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; background: var(--bg-card);
+            border-bottom: 1px solid var(--border); padding: 1rem 0; z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav .container {
+            max-width: 1400px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+        }
+        
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 0.5rem; list-style: none; align-items: center; flex-wrap: wrap; }
+        
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none; padding: 0.5rem 1rem;
+            border-radius: var(--radius); font-weight: 500; font-size: 0.9rem; transition: all 0.3s;
+        }
+        
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); background: var(--bg-secondary); }
+        .theme-toggle { background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: var(--radius); cursor: pointer; font-weight: 500; }
+        
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 5rem 2rem 3rem; text-align: center; color: white; margin-bottom: 4rem;
+        }
+        
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .content-section { max-width: 1200px; margin: 0 auto; padding: 0 2rem 4rem; }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif; font-size: 2.5rem;
+            font-weight: 800; color: var(--text-primary); margin-bottom: 1rem;
+        }
+        
+        .architecture-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 3rem; margin-bottom: 2rem;
+            box-shadow: 0 4px 20px var(--shadow); transition: all 0.3s;
+        }
+        
+        .architecture-card:hover { box-shadow: 0 8px 30px var(--shadow-lg); transform: translateY(-4px); }
+        
+        .architecture-card h3 {
+            font-size: 1.8rem; font-weight: 700;
+            color: var(--primary); margin-bottom: 1.5rem;
+        }
+        
+        .architecture-card p {
+            font-size: 1.1rem; line-height: 1.8;
+            color: var(--text-primary); margin-bottom: 1rem;
+        }
+        
+        .layer-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem; margin: 3rem 0;
+        }
+        
+        .layer-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 2.5rem;
+            box-shadow: 0 4px 20px var(--shadow); transition: all 0.3s;
+            position: relative; overflow: hidden;
+        }
+        
+        .layer-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .layer-card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px var(--shadow-lg); }
+        
+        .layer-number {
+            font-size: 3rem; font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        .layer-card h3 { font-size: 1.6rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem; }
+        .layer-card p { font-size: 1.05rem; line-height: 1.7; color: var(--text-primary); margin-bottom: 1rem; }
+        .layer-card ul { margin-left: 1.5rem; margin-top: 1rem; }
+        .layer-card li { margin-bottom: 0.6rem; line-height: 1.6; }
+        
+        .diagram-container {
+            background: var(--bg-card); border: 2px solid var(--border);
+            border-radius: var(--radius-lg); padding: 2rem; margin: 3rem 0;
+            text-align: center; cursor: pointer; transition: all 0.3s;
+        }
+        
+        .diagram-container:hover { box-shadow: 0 8px 30px var(--shadow-lg); transform: scale(1.02); }
+        
+        .diagram-placeholder {
+            width: 100%; height: 500px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1));
+            border-radius: var(--radius); display: flex; align-items: center;
+            justify-content: center; flex-direction: column;
+        }
+        
+        .diagram-placeholder p {
+            font-size: 1.2rem; font-weight: 600; color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+        
+        .diagram-caption {
+            margin-top: 1.5rem; font-size: 1.05rem;
+            color: var(--text-secondary); font-style: italic;
+        }
+        
+        .tech-decisions {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(16, 185, 129, 0.05));
+            border-radius: var(--radius-lg); padding: 3rem; margin: 3rem 0;
+        }
+        
+        .decision-item {
+            background: var(--bg-card); border-left: 4px solid var(--accent);
+            border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem;
+        }
+        
+        .decision-item h4 { font-size: 1.4rem; font-weight: 700; color: var(--accent); margin-bottom: 0.8rem; }
+        
+        footer { background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 3rem 2rem 2rem; margin-top: 4rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+        .footer-section h4 { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; }
+        .footer-section p, .footer-section a { color: var(--text-secondary); text-decoration: none; display: block; margin-bottom: 0.5rem; }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border); color: var(--text-secondary); }
+        
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); align-items: center; justify-content: center; }
+        .lightbox.active { display: flex; }
+        .lightbox-content { max-width: 90%; max-height: 90%; }
+        .lightbox-close { position: absolute; top: 2rem; right: 2rem; color: white; font-size: 3rem; cursor: pointer; }
+        
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .content-section { padding: 0 1.5rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">QuadraMind</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="problem.html">Problem</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="solution.html">Solution</a></li>
+                <li><a href="architecture.html" class="active">Architecture</a></li>
+                <li><a href="data.html">Data</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="ethics.html">Ethics</a></li>
+                <li><a href="lessons.html">Lessons</a></li>
+                
+            </ul>
+            
+        </div>
+    </nav>
+
+    <div class="page-hero">
+        <h1>System Architecture</h1>
+        <p>Three-tier architecture for scalability and performance</p>
+    </div>
+
+    <div class="content-section">
+        <div class="architecture-card">
+            <h3>Scalable 3-Tier Architecture</h3>
+            <p>The Centralized Student Dashboard implements a modern three-tier architecture designed for scalability, maintainability, and performance. Each layer has a clear separation of concerns, enabling independent development and optimization.</p>
+        </div>
+
+        <div class="diagram-container" onclick="openLightbox('architecture-diagram')">
+            <img src="./images/enterprise-architecture.png" alt="Enterprise Architecture Diagram" style="width: 100%; height: auto; border-radius: var(--radius);">
+            <p class="diagram-caption">Figure A.1: Centralized Student Dashboard 3-Tier Architecture</p>
+        </div>
+
+        <h2 class="section-title">Architecture Layers</h2>
+        
+        <div class="layer-grid">
+            <div class="layer-card">
+                <div class="layer-number">01</div>
+                <h3>Presentation Layer</h3>
+                <p>The React SPA handles the user interface, state management, and visualization.</p>
+                <ul>
+                    <li><strong>Framework:</strong> React 19.0</li>
+                    <li><strong>State Management:</strong> React Context API</li>
+                    <li><strong>Visualization:</strong> Chart.js</li>
+                    <li><strong>Responsive:</strong> Device-agnostic experience</li>
+                    <li><strong>Features:</strong> Dashboard View, Pulse Tracker, Student 360° Profile</li>
+                </ul>
+            </div>
+
+            <div class="layer-card">
+                <div class="layer-number">02</div>
+                <h3>Application Layer</h3>
+                <p>The FastAPI server hosts business logic, risk assessment algorithm, and API endpoints.</p>
+                <ul>
+                    <li><strong>Framework:</strong> FastAPI (Python)</li>
+                    <li><strong>Async:</strong> Non-blocking I/O for concurrent requests</li>
+                    <li><strong>Risk Algorithm:</strong> Multi-factor weighted scoring (40/30/20/10)</li>
+                    <li><strong>API Endpoints:</strong> RESTful design</li>
+                    <li><strong>Data Aggregation:</strong> Complex queries for unified profiles</li>
+                </ul>
+            </div>
+
+            <div class="layer-card">
+                <div class="layer-number">03</div>
+                <h3>Data Layer</h3>
+                <p>MongoDB serves as the flexible document store for all student data.</p>
+                <ul>
+                    <li><strong>Database:</strong> MongoDB (NoSQL)</li>
+                    <li><strong>Collections:</strong> Students, Financials, Housing, Enrollments, Courses, Advisors/Alerts</li>
+                    <li><strong>Key Design:</strong> Student_ID as primary linking key</li>
+                    <li><strong>Normalization:</strong> Third Normal Form (3NF)</li>
+                    <li><strong>Performance:</strong> Aggregation pipelines for efficient queries</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tech-decisions">
+            <h2 class="section-title">Technical Design Decisions</h2>
+            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem;">Why we chose this technology stack</p>
+            
+            <div class="decision-item">
+                <h4>React + FastAPI + MongoDB</h4>
+                <p>The pivot from the initial Django/PostgreSQL plan to the React/FastAPI/MongoDB stack provided <strong>superior performance and schema flexibility</strong>. MongoDB's document model allows for new metrics to be added rapidly without schema migrations, while FastAPI provides the async speed needed for real-time analytics for a large student body.</p>
+            </div>
+            
+            <div class="decision-item">
+                <h4>Async/Await Pattern</h4>
+                <p>FastAPI's async capabilities ensure <strong>non-blocking I/O operations</strong>, critical for handling concurrent requests from multiple advisors accessing the dashboard simultaneously. This architectural choice supports scalability from 1,000 to 10,000+ students without performance degradation.</p>
+            </div>
+            
+            <div class="decision-item">
+                <h4>Document-Based Storage</h4>
+                <p>MongoDB's flexible schema accommodates the <strong>heterogeneous nature of student data</strong> (academic, financial, housing, engagement) without forcing rigid relational constraints. Aggregation pipelines enable efficient reconstruction of Student 360° Profiles with a single query.</p>
+            </div>
+        </div>
+
+        <div class="architecture-card">
+            <h3>Data Flow</h3>
+            <p>1. <strong>User Request:</strong> Advisor accesses Student 360° Profile through React interface</p>
+            <p>2. <strong>API Call:</strong> Frontend sends authenticated request to FastAPI endpoint</p>
+            <p>3. <strong>Data Aggregation:</strong> Backend queries MongoDB, aggregating data from multiple collections using Student_ID</p>
+            <p>4. <strong>Risk Calculation:</strong> Algorithm computes multi-factor risk score (40% GPA + 30% Attendance + 20% Engagement + 10% Financial)</p>
+            <p>5. <strong>Response:</strong> FastAPI returns unified student profile with risk assessment</p>
+            <p>6. <strong>Visualization:</strong> React renders data with Chart.js visualizations and interactive components</p>
+        </div>
+    </div>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Architecture Diagram">
+    </div>
+
+    
+
+    <script>
+        
+        
+        
+        
+        function openLightbox(id) {
+            document.getElementById('lightbox').classList.add('active');
+            document.getElementById('lightbox-img').src = './images/enterprise-architecture.png';
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
