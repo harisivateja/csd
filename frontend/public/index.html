@@ -278,46 +278,6 @@
             margin-bottom: 1rem;
         }
         
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 2rem;
-            text-align: center;
-            transition: var(--transition);
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px var(--shadow);
-        }
-        
-        .stat-value {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
         /* Team Section */
         .team-grid {
             display: grid;
@@ -485,25 +445,6 @@
             <p>This project presents the <strong>Centralized Student Dashboard</strong>, a functional prototype web application developed on a modern React, FastAPI, and MongoDB technology stack. This solution brings all the disparate student data in the system together for 1,000 students into one actionable platform.</p>
             
             <p>The primary feature was a multi-factor predictive risk assessment model (weighted 40% GPA, 30% Attendance, 20% Engagement, and 10% Financial status) that calculated and produced an individualized risk score immediately. The application shifted the advising model from retroactive remediation to <strong>proactive support</strong>.</p>
-        </div>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-value">1,000</div>
-                <div class="stat-label">Total Students</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">70.9%</div>
-                <div class="stat-label">Retention Rate</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">291</div>
-                <div class="stat-label">At-Risk Students</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">40%</div>
-                <div class="stat-label">Faster Data Retrieval</div>
-            </div>
         </div>
 
         <div class="summary-card">
