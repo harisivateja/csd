@@ -16,12 +16,7 @@
             --radius: 12px; --radius-lg: 20px;
         }
         
-        [data-theme="dark"] {
-            --primary: #3b82f6; --secondary: #34d399; --accent: #fbbf24;
-            --text-primary: #f9fafb; --text-secondary: #d1d5db;
-            --bg-primary: #111827; --bg-secondary: #1f2937; --bg-card: #1f2937;
-            --border: #374151; --shadow: rgba(0, 0, 0, 0.3); --shadow-lg: rgba(0, 0, 0, 0.5);
-        }
+        
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -83,7 +78,7 @@
 <body>
     <nav>
         <div class="container">
-            <a href="index.html" class="logo">📊 Student Dashboard</a>
+            <a href="index.html" class="logo">QuadraMind</a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="problem.html">Problem</a></li>
@@ -94,9 +89,9 @@
                 <li><a href="dashboard.html" class="active">Dashboard</a></li>
                 <li><a href="ethics.html">Ethics</a></li>
                 <li><a href="lessons.html">Lessons</a></li>
-                <li><a href="appendix.html">Resources</a></li>
+                
             </ul>
-            <button class="theme-toggle" onclick="toggleTheme()">🌓 Theme</button>
+            
         </div>
     </nav>
 
@@ -195,38 +190,12 @@
         <img id="lightbox-img" class="lightbox-content" src="" alt="Dashboard Screenshot">
     </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Project</h4>
-                <p>Centralized Student Dashboard</p>
-                <p>Horizon State University</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="https://harisivasaiteja.github.io/Studentdashboard/" target="_blank">Live Dashboard</a>
-                <a href="solution.html">Features Overview</a>
-            </div>
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <a href="mailto:group20@horizonstate.edu">group20@horizonstate.edu</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Group 20 - QuadraMind. Last updated: January 2025</p>
-        </div>
-    </footer>
+    
 
     <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        
+        
         
         function openLightbox(src) {
             document.getElementById('lightbox').classList.add('active');
