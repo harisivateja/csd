@@ -16,12 +16,7 @@
             --radius: 12px; --radius-lg: 20px;
         }
         
-        [data-theme="dark"] {
-            --primary: #3b82f6; --secondary: #34d399; --accent: #fbbf24;
-            --text-primary: #f9fafb; --text-secondary: #d1d5db;
-            --bg-primary: #111827; --bg-secondary: #1f2937; --bg-card: #1f2937;
-            --border: #374151; --shadow: rgba(0, 0, 0, 0.3); --shadow-lg: rgba(0, 0, 0, 0.5);
-        }
+        
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -84,7 +79,7 @@
 <body>
     <nav>
         <div class="container">
-            <a href="index.html" class="logo">📊 Student Dashboard</a>
+            <a href="index.html" class="logo">QuadraMind</a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="problem.html">Problem</a></li>
@@ -95,9 +90,9 @@
                 <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="ethics.html">Ethics</a></li>
                 <li><a href="lessons.html">Lessons</a></li>
-                <li><a href="appendix.html">Resources</a></li>
+                
             </ul>
-            <button class="theme-toggle" onclick="toggleTheme()">🌓 Theme</button>
+            
         </div>
     </nav>
 
@@ -114,18 +109,7 @@
         </div>
 
         <div class="diagram-container" onclick="openLightbox('erd')">
-            <div class="diagram-placeholder">
-                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--secondary);">
-                    <rect x="3" y="3" width="7" height="7" />
-                    <rect x="14" y="3" width="7" height="7" />
-                    <rect x="14" y="14" width="7" height="7" />
-                    <rect x="3" y="14" width="7" height="7" />
-                    <line x1="10" y1="6.5" x2="14" y2="6.5" />
-                    <line x1="6.5" y1="10" x2="6.5" y2="14" />
-                    <line x1="17.5" y1="10" x2="17.5" y2="14" />
-                </svg>
-                <p>Click to view Entity Relationship Diagram (ERD)</p>
-            </div>
+            <img src="./images/erd-diagram.png" alt="Entity Relationship Diagram" style="width: 100%; height: auto; border-radius: var(--radius);">
             <p class="diagram-caption">Figure 1: Entity Relationship Diagram - Data Structure</p>
         </div>
 
@@ -257,38 +241,12 @@
         <img id="lightbox-img" class="lightbox-content" src="" alt="ERD Diagram">
     </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Project</h4>
-                <p>Centralized Student Dashboard</p>
-                <p>Horizon State University</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="architecture.html">System Architecture</a>
-                <a href="dashboard.html">Dashboard Insights</a>
-            </div>
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <a href="mailto:group20@horizonstate.edu">group20@horizonstate.edu</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Group 20 - QuadraMind. Last updated: January 2025</p>
-        </div>
-    </footer>
+    
 
     <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        
+        
         
         function openLightbox(id) {
             document.getElementById('lightbox').classList.add('active');
