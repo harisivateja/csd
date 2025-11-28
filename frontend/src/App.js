@@ -7,31 +7,39 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
   useEffect(() => {
-    helloWorldApi();
+    // Redirect to presentation website
+    window.location.href = '/PREVIEW.html';
   }, []);
 
   return (
     <div>
       <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
+        <div style={{textAlign: 'center'}}>
+          <h1 style={{fontSize: '2.5rem', marginBottom: '1rem'}}>Centralized Student Dashboard</h1>
+          <p style={{fontSize: '1.2rem', marginBottom: '2rem'}}>Redirecting to presentation website...</p>
+          <a 
+            href="/PREVIEW.html" 
+            style={{
+              display: 'inline-block',
+              padding: '1rem 2rem',
+              background: 'linear-gradient(135deg, #667eea, #764ba2)',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '8px',
+              fontWeight: '600',
+              fontSize: '1.1rem'
+            }}
+          >
+            View Presentation Site
+          </a>
+          <div style={{marginTop: '2rem'}}>
+            <a href="/index.html" style={{color: '#61dafb', marginRight: '1rem'}}>Home</a>
+            <a href="/problem.html" style={{color: '#61dafb', marginRight: '1rem'}}>Problem</a>
+            <a href="/solution.html" style={{color: '#61dafb', marginRight: '1rem'}}>Solution</a>
+            <a href="/dashboard.html" style={{color: '#61dafb'}}>Dashboard</a>
+          </div>
+        </div>
       </header>
     </div>
   );
