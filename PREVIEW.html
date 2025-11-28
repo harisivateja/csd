@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Preview - Quick Access</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        p {
+            color: #666;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .page-link {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        .page-link:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+        }
+        .note {
+            background: #f0f9ff;
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 8px;
+        }
+        .note h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        .note ul {
+            margin-left: 1.5rem;
+            color: #666;
+        }
+        .note li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Student Dashboard Website</h1>
+        <p>Click any page below to preview your presentation website</p>
+        
+        <div class="pages-grid">
+            <a href="index.html" class="page-link">🏠 Home</a>
+            <a href="problem.html" class="page-link">❗ Problem</a>
+            <a href="research.html" class="page-link">🔍 Research</a>
+            <a href="solution.html" class="page-link">💡 Solution</a>
+            <a href="architecture.html" class="page-link">🏗️ Architecture</a>
+            <a href="data.html" class="page-link">📊 Data</a>
+            <a href="dashboard.html" class="page-link">📈 Dashboard</a>
+            <a href="ethics.html" class="page-link">⚖️ Ethics</a>
+            <a href="lessons.html" class="page-link">📚 Lessons</a>
+            <a href="appendix.html" class="page-link">📎 Resources</a>
+        </div>
+        
+        <div class="note">
+            <h3>✅ What's Ready:</h3>
+            <ul>
+                <li>All 10 HTML pages created and functional</li>
+                <li>Your ERD diagram integrated (click to view on data.html)</li>
+                <li>Your Enterprise Architecture diagram integrated (click to view on architecture.html)</li>
+                <li>Dashboard screenshot included</li>
+                <li>Dark mode toggle working on all pages</li>
+                <li>Fully responsive design</li>
+                <li>No "Made with Emergent" tags</li>
+            </ul>
+        </div>
+        
+        <div class="note" style="background: #fef3c7; border-color: #f59e0b;">
+            <h3>📋 Next Steps:</h3>
+            <ul>
+                <li>Test the website by clicking through all pages</li>
+                <li>Click on diagram placeholders to see your uploaded ERD and Architecture diagrams</li>
+                <li>Try the dark mode toggle (🌓 Theme button)</li>
+                <li>Test on mobile by resizing your browser</li>
+                <li>When ready, follow README.md to deploy to GitHub Pages</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
